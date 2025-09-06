@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import toast from "react-hot-toast";
+const api = import.meta.env.VITE_API_URL
+
 
 
 export const UserDashboard = () => {
@@ -17,7 +19,7 @@ export const UserDashboard = () => {
   const fetchMyTasks = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:3000/api/tasks/", {
+      const res = await axios.get(`${api}/api/tasks/`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setTasks(res.data);
@@ -35,12 +37,12 @@ export const UserDashboard = () => {
     try {
       const token = localStorage.getItem("token");
       if (editingId) {
-        await axios.patch(`http://localhost:3000/api/tasks/${editingId}`, form, {
+        await axios.patch(`${api}/api/tasks/${editingId}`, form, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success(" Task updated successfully!");
       } else {
-        await axios.post("http://localhost:3000/api/tasks/", form, {
+        await axios.post(`${api}/api/tasks/`, form, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success(" New Task added successfully!");
@@ -57,7 +59,7 @@ export const UserDashboard = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:3000/api/tasks/${id}`, {
+      await axios.delete(`${api}/api/tasks/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success(" Task deleted!");

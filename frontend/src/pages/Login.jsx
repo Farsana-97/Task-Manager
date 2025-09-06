@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+const api = import.meta.env.VITE_API_URL
+
+
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -11,7 +14,7 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/login", {
+      const res = await axios.post(`${api}/api/auth/login`, {
         username,
         password,
       });

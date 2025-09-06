@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+const api = import.meta.env.VITE_API_URL
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/register", {
+      const res = await axios.post(`${api}/api/auth/register`, {
         username,
         email,
         password,
