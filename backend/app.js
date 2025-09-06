@@ -10,7 +10,7 @@ import { errorHandler } from "./middlewares/errorHandler.js"
 dotenv.config()
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({origin:'https://task-manager-iota-eight-62.vercel.app'}))
 
 app.use("/api/auth",userRouter)
 app.use("/api/tasks",taskRouter)
